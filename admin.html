@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - TeAura</title>
+</head>
+<body style="background-color: #f4f4f9; font-family: sans-serif; margin: 0;">
+    <header style="background-color: #1E5631; color: white; text-align: center; padding: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+        <h1 id="tituloForm" style="margin: 0; font-family: serif;">Painel Administrativo</h1>
+        <button onclick="fazerLogout()" style="background: #D4AF37; color: #333; border: none; padding: 8px 20px; border-radius: 4px; cursor: pointer; margin-top: 10px; font-weight: bold;">Sair</button>
+    </header>
+
+    <main class="vitrine" style="display: flex; flex-direction: column; align-items: center; padding: 20px;">
+        
+        <div class="produto" style="max-width: 450px; width: 100%; border: 2px solid #D4AF37; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 id="statusAcao" style="color: #1E5631; text-align: center; margin-top: 0;">Novo Produto</h3>
+            <input type="hidden" id="editId">
+            <div class="formulario-cliente" style="display: flex; flex-direction: column; gap: 10px;">
+                <input type="text" id="nomeAdmin" placeholder="Nome" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                <input type="text" id="descAdmin" placeholder="Descrição" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                <input type="number" id="precoAdmin" placeholder="Preço" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                
+                <textarea id="imgAdmin" placeholder="Cole os links das Imagens aqui (Uma imagem por linha)" rows="3" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;"></textarea>
+                
+                <select id="catAdmin" style="padding: 10px; border-radius: 4px; border: 1px solid #ccc;">
+                    <option value="Perfumes">Perfumes</option>
+                    <option value="Loções">Loções</option>
+                    <option value="Bolsas">Bolsas</option>
+                    <option value="Roupas">Roupas</option>
+                    <option value="Sapatos">Sapatos</option>
+                    <option value="Outros">Outros</option>
+                </select>
+
+                <select id="generoAdmin" style="padding: 10px; border-radius: 4px; border: 1px solid #ccc;">
+                    <option value="Todos">Unissex / Todos</option>
+                    <option value="Feminino">Feminino</option>
+                    <option value="Masculino">Masculino</option>
+                    <input type="text" id="tamanhosAdmin" placeholder="Tamanhos (EX: P, M, G, ou 36 ao 42)" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                </select>
+            </div>
+            <button id="btnSalvar" style="background: #1E5631; width: 100%; margin-top: 15px; padding: 12px; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Salvar Produto</button>
+            <button id="btnCanc" onclick="cancelarEdicao()" style="background: #666; width: 100%; margin-top: 5px; padding: 12px; color: white; border: none; border-radius: 4px; cursor: pointer; display: none;">Cancelar</button>
+        </div>
+
+        <div style="max-width: 600px; width: 100%; margin-top: 40px;">
+            <h3 style="text-align: center; color: #1E5631;">Produtos em Estoque</h3>
+            
+            <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 20px; display: flex; justify-content: center; align-items: center; gap: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                <label for="filtroCategoriaAdmin" style="font-weight: bold; color: #333;">Filtrar Lista:</label>
+                <select id="filtroCategoriaAdmin" style="padding: 8px; border-radius: 4px; border: 1px solid #ccc; flex-grow: 1; max-width: 250px;">
+                    <option value="Todas">Todas as Categorias</option>
+                    <option value="Perfumes">Perfumes</option>
+                    <option value="Loções">Loções</option>
+                    <option value="Bolsas">Bolsas</option>
+                    <option value="Roupas">Roupas</option>
+                    <option value="Sapatos">Sapatos</option>
+                    <option value="Outros">Outros</option>
+                </select>
+            </div>
+
+            <div id="listaProdutosAdmin"></div>
+        </div>
+    </main>
+    <script type="module" src="admin.js"></script>
+</body>
+</html>
