@@ -24,33 +24,26 @@
             color: var(--preto-suave); 
         }
 
-        /* 1. HERÓI (Rola com a página) */
-        .hero { 
-            background: linear-gradient(rgba(30, 86, 49, 0.7), rgba(30, 86, 49, 0.7)), 
-                        url('https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&q=80'); 
-            background-size: cover; background-position: center; height: 350px; 
-            display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; text-align: center; padding: 20px; 
+        /* CABEÇALHO COMPLETO FIXO (Logo + Menus) */
+        .cabecalho-global {
+            position: sticky; top: 0; z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 15px 5px 12px 5px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            text-align: center;
+            border-bottom: 2px solid #E5D3B3;
         }
-        .logo { 
-            font-family: 'Cinzel', serif; font-size: 3rem; margin: 0; letter-spacing: 4px; 
-            background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728); 
+        .logo-compacto {
+            font-family: 'Cinzel', serif; font-size: 2.2rem; margin: 0 0 5px 0; letter-spacing: 3px;
+            background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;
         }
-        .luxury-subtitle { 
-            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 5px; color: var(--dourado); margin-bottom: 20px; display: block; 
-        }
-        .btn-comprar { 
-            margin-top: 15px; padding: 15px 45px; background: linear-gradient(45deg, #BF953F, #FCF6BA, #B38728); 
-            border: none; color: #442d00; font-weight: bold; text-transform: uppercase; 
-            cursor: pointer; border-radius: 50px; transition: 0.5s; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        .luxury-subtitle-compacto {
+            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 4px; color: var(--dourado); margin-bottom: 15px; display: block;
         }
 
-        /* 2. MENU FIXO (Gruda no topo) */
-        .menu-fixo { 
-            position: sticky; top: 0; z-index: 1000; 
-            background-color: rgba(255, 255, 255, 0.96); backdrop-filter: blur(8px); 
-            padding: 15px 5px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center;
-        }
+        /* NAVEGAÇÃO / BOTÕES */
         #nav-categorias { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
         #nav-categorias button { 
             background: white; border: 1px solid var(--verde-luxo); color: var(--verde-luxo); 
@@ -58,6 +51,9 @@
             font-weight: 600; border-radius: 4px; font-size: 0.85rem;
         }
         #nav-categorias button:hover, #nav-categorias button.ativo { background-color: var(--verde-luxo); color: white; }
+
+        /* Estilo especial para o botão ativo de Dia das Mães */
+        #nav-categorias button.btn-maes:hover, #nav-categorias button.btn-maes.ativo { background-color: #c9184a !important; color: white !important; border-color: #c9184a !important; }
 
         .nav-genero { 
             margin-top: 12px; border-top: 1px solid #eee; padding-top: 10px; 
@@ -73,7 +69,7 @@
         /* VITRINE */
         .titulo-colecao { 
             font-family: 'Cinzel', serif; text-align: center; color: var(--verde-luxo); 
-            font-size: 2.2rem; margin: 50px 0 30px 0; text-transform: uppercase; letter-spacing: 2px; 
+            font-size: 2.2rem; margin: 40px 0 30px 0; text-transform: uppercase; letter-spacing: 2px; 
         }
         .container { max-width: 1200px; margin: 0 auto 60px auto; padding: 0 20px; }
         #vitrine { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
@@ -120,15 +116,13 @@
 </head>
 <body>
 
-    <section class="hero">
-        <h1 class="logo">TE AURA</h1>
-        <span class="luxury-subtitle">Boutique | Cosméticos & Moda</span>
-        <button class="btn-comprar" onclick="window.scrollTo({top: 450, behavior: 'smooth'})">Comprar Agora</button>
-    </section>
-
-    <div class="menu-fixo">
+    <header class="cabecalho-global">
+        <h1 class="logo-compacto">TE AURA</h1>
+        <span class="luxury-subtitle-compacto">Boutique | Cosméticos & Moda</span>
+        
         <nav id="nav-categorias">
             <button onclick="filtrarCategoria('Todas')" class="ativo">Todas</button>
+            <button onclick="filtrarCategoria('Kits Mães')" class="btn-maes" style="border-color: #c9184a; color: #c9184a;">🎁 Dia das Mães</button>
             <button onclick="filtrarCategoria('Loções')">Loções</button>
             <button onclick="filtrarCategoria('Perfumes')">Perfumes</button>
             <button onclick="filtrarCategoria('Bolsas')">Bolsas</button>
@@ -142,7 +136,7 @@
             <button onclick="filtrarGenero('Feminino')">Feminino</button>
             <button onclick="filtrarGenero('Masculino')">Masculino</button>
         </nav>
-    </div>
+    </header>
 
     <div class="container">
         <h2 class="titulo-colecao">Coleção Exclusiva TeAura</h2>
@@ -171,7 +165,7 @@
         </p>
         <div style="margin-top: 20px;">
             <a href="admin.html" style="color: var(--dourado); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; transition: 0.3s;">
-               2026
+                2026
             </a>
         </div>
     </footer>
