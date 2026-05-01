@@ -43,87 +43,60 @@
             font-size: 0.6rem; text-transform: uppercase; letter-spacing: 3px; color: var(--dourado); margin-bottom: 8px; display: block;
         }
 
-        /* NAVEGAÇÃO / BOTÕES (Efeito Carrossel) */
+        /* NAVEGAÇÃO / BOTÕES (Efeito Carrossel para Celular) */
         #nav-categorias, .nav-genero { 
             display: flex; gap: 8px; 
-            overflow-x: auto; /* Permite arrastar para o lado */
-            white-space: nowrap; /* Não deixa os botões pularem linha */
+            overflow-x: auto; 
+            white-space: nowrap; 
             padding: 5px 10px 10px 10px;
-            scrollbar-width: none; /* Esconde barra no Firefox */
-            -ms-overflow-style: none; /* Esconde barra no IE/Edge */
+            scrollbar-width: none; 
+            -ms-overflow-style: none; 
         }
-        /* Esconde a barra de rolagem no Chrome/Safari */
         #nav-categorias::-webkit-scrollbar, .nav-genero::-webkit-scrollbar { display: none; }
 
-        /* No Computador, os botões ficam centralizados */
         @media (min-width: 768px) {
             #nav-categorias, .nav-genero { justify-content: center; overflow-x: hidden; }
             .logo-compacto { font-size: 2.2rem; }
         }
 
         #nav-categorias button { 
-            flex-shrink: 0; /* Impede o botão de diminuir de tamanho */
+            flex-shrink: 0;
             background: white; border: 1px solid var(--verde-luxo); color: var(--verde-luxo); 
-            padding: 8px 16px; cursor: pointer; transition: 0.3s; font-family: 'Montserrat', sans-serif; 
-            font-weight: 600; border-radius: 4px; font-size: 0.85rem;
+            padding: 8px 16px; cursor: pointer; transition: 0.3s; font-weight: 600; border-radius: 4px; font-size: 0.85rem;
         }
         #nav-categorias button:hover, #nav-categorias button.ativo { background-color: var(--verde-luxo); color: white; }
 
-        /* Botão especial Dia das Mães */
+        /* Estilo especial para o botão de Dia das Mães */
         #nav-categorias button.btn-maes:hover, #nav-categorias button.btn-maes.ativo { 
             background-color: #c9184a !important; color: white !important; border-color: #c9184a !important; 
         }
 
         .nav-genero { margin-top: 5px; border-top: 1px solid #eee; padding-top: 8px; }
         .nav-genero button { 
-            flex-shrink: 0;
-            border: 1px solid var(--dourado); color: var(--dourado); border-radius: 20px; 
-            font-size: 0.75rem; padding: 6px 18px; cursor: pointer; transition: 0.3s; background: white;
-            font-weight: 600; text-transform: uppercase;
+            flex-shrink: 0; border: 1px solid var(--dourado); color: var(--dourado); border-radius: 20px; 
+            font-size: 0.75rem; padding: 6px 18px; cursor: pointer; transition: 0.3s; background: white; font-weight: 600;
         }
         .nav-genero button:hover, .nav-genero button.ativo { background-color: var(--dourado); color: white; }
 
         /* VITRINE */
-        .titulo-colecao { 
-            font-family: 'Cinzel', serif; text-align: center; color: var(--verde-luxo); 
-            font-size: 1.8rem; margin: 30px 0 20px 0; text-transform: uppercase; letter-spacing: 2px; 
-        }
         .container { max-width: 1200px; margin: 0 auto 60px auto; padding: 0 15px; }
-        #vitrine { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .titulo-colecao { font-family: 'Cinzel', serif; text-align: center; color: var(--verde-luxo); font-size: 1.8rem; margin: 30px 0 20px 0; text-transform: uppercase; letter-spacing: 2px; }
+        #vitrine { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
         
-        /* CARTÃO DO PRODUTO */
-        .produto { 
-            background: white; padding: 15px; text-align: center; border-radius: 12px; 
-            border: 1px solid #E5D3B3; box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
-        }
-        .produto img.img-principal { width: 100%; height: 300px; object-fit: cover; border-radius: 8px; }
-        
-        /* GALERIA MINIATURAS */
-        .galeria-miniaturas { display: flex; justify-content: center; gap: 8px; margin-top: 12px; overflow-x: auto; padding-bottom: 5px; }
-        .miniatura { width: 50px; height: 50px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid transparent; opacity: 0.6; }
-        .miniatura:hover { opacity: 1; border-color: var(--dourado); }
+        .produto { background: white; padding: 15px; text-align: center; border-radius: 12px; border: 1px solid #E5D3B3; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .produto img { width: 100%; height: 300px; object-fit: cover; border-radius: 8px; }
 
-        /* SELETOR DE TAMANHOS */
-        .seletor-tamanhos { display: flex; justify-content: center; gap: 8px; margin: 15px 0; flex-wrap: wrap; }
-        .btn-tamanho { border: 1px solid #ddd; background: white; padding: 5px 12px; cursor: pointer; border-radius: 4px; font-size: 0.8rem; }
-        .btn-tamanho.selecionado { background-color: var(--dourado); color: white; border-color: var(--dourado); }
-
-        .produto button.btn-adicionar { 
+        .btn-adicionar { 
             background: linear-gradient(45deg, #BF953F, #FCF6BA, #B38728); 
-            color: #442d00; font-weight: bold; border: none; padding: 12px; 
-            width: 100%; cursor: pointer; margin-top: 10px; border-radius: 25px; 
-            text-transform: uppercase; font-size: 0.8rem;
+            color: #442d00; font-weight: bold; border: none; padding: 12px; width: 100%; cursor: pointer; margin-top: 10px; border-radius: 25px; text-transform: uppercase; font-size: 0.8rem;
         }
 
         /* CARRINHO */
         .carrinho-oculto { display: none; }
-        .carrinho-visivel { 
-            position: fixed; right: 0; top: 0; width: 100%; max-width: 350px; height: 100%; 
-            background: white; box-shadow: -5px 0 25px rgba(0,0,0,0.15); 
-            padding: 20px; z-index: 2000; overflow-y: auto; 
-        }
-        input, textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
-        .btn-whatsapp { background-color: #25D366; color: white; border: none; padding: 16px; width: 100%; font-weight: bold; cursor: pointer; border-radius: 5px; }
+        .carrinho-visivel { position: fixed; right: 0; top: 0; width: 100%; max-width: 350px; height: 100%; background: white; z-index: 2000; padding: 20px; box-shadow: -5px 0 20px rgba(0,0,0,0.2); overflow-y: auto; }
+
+        /* RODAPÉ */
+        footer { border-top: 1px solid #E5D3B3; text-align: center; padding: 40px 20px; margin-top: 50px; }
     </style>
 </head>
 <body>
@@ -144,7 +117,7 @@
         </nav>
         
         <nav class="nav-genero" id="nav-genero">
-            <button onclick="filtrarGenero('Todos')" class="ativo">Todos os Gêneros</button>
+            <button onclick="filtrarGenero('Todos')" class="ativo">Todos</button>
             <button onclick="filtrarGenero('Feminino')">Feminino</button>
             <button onclick="filtrarGenero('Masculino')">Masculino</button>
         </nav>
@@ -152,18 +125,23 @@
 
     <div class="container">
         <h2 class="titulo-colecao">Coleção Exclusiva</h2>
-        <div id="vitrine">
-            </div>
+        <div id="vitrine"></div>
     </div>
 
+    <footer>
+        <h2 style="font-family: 'Cinzel', serif; color: var(--verde-luxo);">TE AURA</h2>
+        <p style="font-size: 0.8rem; color: #888;">© 2026 TeAura Boutique - Todos os direitos reservados</p>
+        <div style="margin-top: 15px;">
+            <a href="admin.html" style="color: var(--dourado); text-decoration: none; font-size: 0.7rem; font-weight: bold; text-transform: uppercase;">Acesso Administrativo</a>
+        </div>
+    </footer>
+
     <div id="carrinho" class="carrinho-oculto">
-        <button onclick="voltarParaLoja()" style="float: right; border: none; background: none; font-weight: bold; cursor: pointer; color: red;">[X]</button>
-        <h3 style="font-family: 'Cinzel', serif; color: var(--verde-luxo);">Seu Carrinho</h3>
-        <div id="itens-carrinho" style="margin: 20px 0;"></div>
+        <button onclick="voltarParaLoja()" style="float:right; border:none; color:red; cursor:pointer;">[X] FECHAR</button>
+        <h3>Seu Carrinho</h3>
+        <div id="itens-carrinho"></div>
         <p><strong>Total: R$ <span id="valor-total">0.00</span></strong></p>
-        <input type="text" id="nomeCliente" placeholder="Seu Nome">
-        <textarea id="enderecoCliente" placeholder="Endereço de Entrega" rows="3"></textarea>
-        <button class="btn-whatsapp" onclick="enviarParaWhatsApp()">🚀 Finalizar no WhatsApp</button>
+        <button class="btn-adicionar" style="background: #25D366; color:white;" onclick="enviarParaWhatsApp()">Pedir via WhatsApp</button>
     </div>
 
     <script type="module">
@@ -183,90 +161,73 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        let carrinho = []; 
         let listaDeProdutos = []; 
         let categoriaAtual = 'Todas'; 
         let generoAtual = 'Todos';
+        let carrinho = [];
 
         async function carregarProdutos() {
-            try {
-                const querySnapshot = await getDocs(collection(db, "produtos"));
-                listaDeProdutos = []; 
-                querySnapshot.forEach((doc) => {
-                    let p = doc.data(); p.id = doc.id;
-                    listaDeProdutos.push(p);
-                });
-                renderizarVitrine();
-            } catch (erro) { console.error(erro); }
+            const snap = await getDocs(collection(db, "produtos"));
+            listaDeProdutos = [];
+            snap.forEach(doc => listaDeProdutos.push({ ...doc.data(), id: doc.id }));
+            renderizarVitrine();
         }
 
         window.filtrarCategoria = (cat) => {
             categoriaAtual = cat;
             document.querySelectorAll('#nav-categorias button').forEach(b => b.classList.remove('ativo'));
-            if(window.event) window.event.target.classList.add('ativo');
+            event.target.classList.add('ativo');
             renderizarVitrine();
         };
 
         window.filtrarGenero = (gen) => {
             generoAtual = gen;
             document.querySelectorAll('#nav-genero button').forEach(b => b.classList.remove('ativo'));
-            if(window.event) window.event.target.classList.add('ativo');
+            event.target.classList.add('ativo');
             renderizarVitrine();
-        };
-
-        window.selecionarTamanho = (botao) => {
-            const container = botao.parentElement;
-            container.querySelectorAll('.btn-tamanho').forEach(b => b.classList.remove('selecionado'));
-            botao.classList.add('selecionado');
         };
 
         function renderizarVitrine() {
             const vitrine = document.getElementById('vitrine');
             vitrine.innerHTML = "";
             let filtrados = listaDeProdutos;
+            
             if (categoriaAtual !== 'Todas') filtrados = filtrados.filter(p => p.categoria === categoriaAtual);
             if (generoAtual !== 'Todos') filtrados = filtrados.filter(p => p.genero === generoAtual);
 
-            filtrados.forEach((p) => {
-                let arrayImgs = p.imagens || [p.imagem];
-                let htmlTamanhos = "";
-                if (p.tamanhos) {
-                    htmlTamanhos = `<div class="seletor-tamanhos">`;
-                    p.tamanhos.split(',').forEach(t => {
-                        htmlTamanhos += `<button class="btn-tamanho" onclick="selecionarTamanho(this)">${t.trim()}</button>`;
-                    });
-                    htmlTamanhos += `</div>`;
-                }
+            if(filtrados.length === 0) {
+                vitrine.innerHTML = "<p style='grid-column: 1/-1; text-align:center; padding: 50px;'>Nenhum produto nesta categoria ainda.</p>";
+                return;
+            }
 
+            filtrados.forEach(p => {
+                const img = p.imagens ? p.imagens[0] : p.imagem;
                 vitrine.innerHTML += `
                     <div class="produto">
-                        <img src="${arrayImgs[0]}" class="img-principal">
-                        <h3 style="font-family: 'Cinzel', serif; margin: 10px 0;">${p.nome}</h3>
-                        ${htmlTamanhos}
+                        <img src="${img}">
+                        <h3>${p.nome}</h3>
                         <p><strong>R$ ${Number(p.preco).toFixed(2)}</strong></p>
-                        <button class="btn-adicionar" onclick="adicionarAoCarrinho('${p.nome}', ${p.preco})">Adicionar</button>
+                        <button class="btn-adicionar" onclick="adicionar('${p.nome}', ${p.preco})">Adicionar</button>
                     </div>`;
             });
         }
 
-        window.adicionarAoCarrinho = (nome, preco) => { 
-            carrinho.push({ nome, preco }); 
-            document.getElementById('carrinho').className = 'carrinho-visivel'; 
+        window.adicionar = (nome, preco) => {
+            carrinho.push({nome, preco});
+            document.getElementById('carrinho').className = 'carrinho-visivel';
             const total = carrinho.reduce((sum, i) => sum + i.preco, 0);
             document.getElementById('valor-total').innerText = total.toFixed(2);
-            document.getElementById('itens-carrinho').innerHTML = carrinho.map(i => `<p>• ${i.nome} - R$ ${i.preco.toFixed(2)}</p>`).join('');
-        };
-
-        window.enviarParaWhatsApp = () => { 
-            const nome = document.getElementById('nomeCliente').value;
-            const endereco = document.getElementById('enderecoCliente').value;
-            let msg = `*🛍️ PEDIDO TE AURA*\n*Cliente:* ${nome}\n*Endereço:* ${endereco}\n\n*ITENS:*\n`;
-            carrinho.forEach(i => msg += `• ${i.nome}\n`);
-            msg += `\n*TOTAL: R$ ${document.getElementById('valor-total').innerText}*`;
-            window.open(`https://wa.me/${TELEFONE_WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
-        };
+            document.getElementById('itens-carrinho').innerHTML = carrinho.map(i => `<p>• ${i.nome}</p>`).join('');
+        }
 
         window.voltarParaLoja = () => document.getElementById('carrinho').className = 'carrinho-oculto';
+
+        window.enviarParaWhatsApp = () => {
+            let msg = "*Novo Pedido TeAura*\n\n";
+            carrinho.forEach(i => msg += `- ${i.nome}\n`);
+            msg += `\n*Total: R$ ${document.getElementById('valor-total').innerText}*`;
+            window.open(`https://wa.me/${TELEFONE_WHATSAPP}?text=${encodeURIComponent(msg)}`);
+        }
 
         carregarProdutos();
     </script>
