@@ -49,6 +49,21 @@
         <a href="index.html" class="back-link">Voltar para a Loja</a>
     </div>
 
-    <script type="module" src="login.js"></script>
+    <script>
+        // Define a sua senha aqui
+        const SENHA_SECRETA = "1234";
+
+        window.verificar = () => {
+            const senhaDigitada = document.getElementById('senha').value;
+            
+            if (senhaDigitada === SENHA_SECRETA) {
+                // Autentica o usuário e permite o redirecionamento
+                localStorage.setItem('admin_autenticado', 'true');
+                window.location.href = "admin.html";
+            } else {
+                alert("Senha incorreta!");
+            }
+        };
+    </script>
 </body>
 </html>

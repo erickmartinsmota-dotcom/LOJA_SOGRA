@@ -32,26 +32,16 @@
     </style>
     
     <script>
-        // Pede a senha assim que a página é aberta
-        (function() {
-            const senhaCorreta = "1234"; // Defina a sua senha secreta aqui!
-            const isAuth = localStorage.getItem('admin_autenticado') === 'true';
+        // Verificação estrita de segurança: Se não tem a chave no navegador, bloqueia a página imediatamente!
+        if (localStorage.getItem('admin_autenticado') !== 'true') {
+            alert("Acesso negado! Você precisa fazer o login primeiro.");
+            window.location.href = "login.html";
+        }
 
-            if (!isAuth) {
-                const senhaDigitada = prompt("Painel Protegido - Digite a senha de acesso:");
-                if (senhaDigitada !== senhaCorreta) {
-                    alert("Acesso negado! Redirecionando para a loja...");
-                    window.location.href = "index.html";
-                } else {
-                    // Salva a autorização na memória do navegador
-                    localStorage.setItem('admin_autenticado', 'true');
-                }
-            }
-        })();
-
+        // Função de saída
         window.sairAdmin = () => {
             localStorage.removeItem('admin_autenticado');
-            window.location.href = "index.html";
+            window.location.href = "login.html";
         };
     </script>
 </head>

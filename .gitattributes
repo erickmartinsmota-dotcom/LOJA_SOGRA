@@ -1,2 +1,7 @@
-# Auto detect text files and perform LF normalization
+# Define the default behavior for files, in case the user's platform doesn't.
 * text=auto
+
+# Force files to always use LF (Unix line endings) on checkout
+*.js text eol=lf
+*.html text eol=lf
+*.css text eol=lf

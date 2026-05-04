@@ -1,5 +1,5 @@
 // login.js
-const SENHA_SECRETA = "1234"; // Defina sua senha aqui
+const SENHA_SECRETA = "1234"; 
 
 window.verificar = () => {
     const senhaDigitada = document.getElementById('senha').value;
