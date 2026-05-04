@@ -6,68 +6,98 @@
     <title>Admin | TeAura Boutique</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Cinzel:wght@700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Montserrat', sans-serif; background-color: #f4f4f9; padding: 20px; color: #333; }
-        .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        h2 { font-family: 'Cinzel', serif; text-align: center; color: #1E5631; }
-        label { display: block; margin-top: 15px; font-weight: 600; font-size: 0.9rem; }
-        input, select, textarea { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
-        button { background: #1E5631; color: white; border: none; padding: 15px; width: 100%; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 25px; transition: 0.3s; }
-        button:hover { background: #143d22; }
-        .aviso { background: #e7f3ef; padding: 10px; border-radius: 5px; font-size: 0.8rem; color: #1E5631; margin-top: 10px; }
+        :root { --verde: #1E5631; --dourado: #D4AF37; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #f8f9fa; padding: 15px; color: #333; }
+        
+        .container { max-width: 500px; margin: 0 auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        
+        h2 { font-family: 'Cinzel', serif; text-align: center; color: var(--verde); margin-bottom: 5px; font-size: 1.5rem; }
+        label { display: block; margin-top: 12px; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; color: #666; }
+        input, select, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 0.9rem; }
+        
+        .btn-principal { background: var(--verde); color: white; border: none; padding: 12px; width: 100%; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 20px; transition: 0.3s; }
+        .btn-principal:hover { background: #143d22; }
+
+        .busca-container { display: flex; gap: 8px; margin-top: 15px; }
+        .busca-container input, .busca-container select { margin-top: 0; }
+
+        .lista-produtos { margin-top: 40px; border-top: 2px solid #eee; padding-top: 20px; }
+        .item-produto { display: flex; align-items: center; justify-content: space-between; padding: 10px; border-bottom: 1px solid #eee; font-size: 0.85rem; }
+        .item-produto img { width: 40px; height: 40px; object-fit: cover; border-radius: 4px; margin-right: 10px; }
+        .info { flex-grow: 1; }
+        .acoes { display: flex; gap: 5px; }
+        .btn-edit { background: #f0ad4e; color: white; border: none; padding: 5px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; }
+        .btn-del { background: #d9534f; color: white; border: none; padding: 5px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Painel Administrativo</h2>
-    <p style="text-align: center; font-size: 0.8rem;">Cadastre novos produtos na TeAura Boutique</p>
+    <h2>Painel TeAura</h2>
+    <p style="text-align: center; font-size: 0.75rem; color: #999; margin-bottom: 20px;">Gerenciamento de Estoque</p>
 
     <form id="form-produto">
+        <input type="hidden" id="id-edicao"> 
+        
         <label>Nome do Produto</label>
-        <input type="text" id="nome" placeholder="Ex: Kit Spa Dia das Mães" required>
+        <input type="text" id="nome" placeholder="Nome do item" required>
 
-        <label>Preço (Somente números)</label>
-        <input type="number" id="preco" step="0.01" placeholder="Ex: 149.90" required>
-
-        <label>Categoria</label>
-        <select id="categoria" required>
-            <option value="">Selecione uma categoria...</option>
-            <option value="Kits Mães">🎁 Kits Dia das Mães</option>
-            <option value="Loções">Loções</option>
-            <option value="Perfumes">Perfumes</option>
-            <option value="Bolsas">Bolsas</option>
-            <option value="Roupas">Roupas</option>
-            <option value="Sapatos">Sapatos</option>
-            <option value="Outros">Outros</option>
-        </select>
+        <div style="display: flex; gap: 10px;">
+            <div style="flex: 1;">
+                <label>Preço</label>
+                <input type="number" id="preco" step="0.01" placeholder="0.00" required>
+            </div>
+            <div style="flex: 1;">
+                <label>Categoria</label>
+                <select id="categoria" required>
+                    <option value="Kits Mães">🎁 Kits Dia das Mães</option>
+                    <option value="Loções">Loções</option>
+                    <option value="Perfumes">Perfumes</option>
+                    <option value="Bolsas">Bolsas</option>
+                    <option value="Roupas">Roupas</option>
+                    <option value="Sapatos">Sapatos</option>
+                    <option value="Outros">Outros</option>
+                </select>
+            </div>
+        </div>
 
         <label>Gênero</label>
         <select id="genero">
             <option value="Feminino">Feminino</option>
             <option value="Masculino">Masculino</option>
-            <option value="Todos">Unissex / Todos</option>
+            <option value="Todos">Unissex</option>
         </select>
 
-        <label>Tamanhos (Separe por vírgula)</label>
-        <input type="text" id="tamanhos" placeholder="Ex: P, M, G ou 36, 38, 40">
+        <label>Link da Imagem</label>
+        <input type="url" id="imagem" placeholder="https://..." required>
 
-        <label>Link da Imagem Principal</label>
-        <input type="url" id="imagem" placeholder="https://link-da-foto.jpg" required>
-
-        <label>Links de Outras Fotos (Separe por vírgula)</label>
-        <textarea id="imagens_extra" rows="2" placeholder="Link1, Link2, Link3..."></textarea>
-
-        <label>Descrição Curta</label>
-        <textarea id="descricao" rows="3" placeholder="Detalhes do produto..."></textarea>
-
-        <button type="submit">Cadastrar Produto</button>
+        <button type="submit" id="btn-submit" class="btn-principal">Salvar Produto</button>
     </form>
-    <div id="status"></div>
+
+    <div class="lista-produtos">
+        <h3 style="font-size: 1rem; color: var(--verde); margin-bottom: 10px;">Produtos Cadastrados</h3>
+        
+        <div class="busca-container">
+            <input type="text" id="filtro-nome" placeholder="Buscar por nome..." oninput="window.filtrarLista()">
+            <select id="filtro-categoria" onchange="window.filtrarLista()">
+                <option value="Todas">Todas as Categorias</option>
+                <option value="Kits Mães">🎁 Kits Dia das Mães</option>
+                <option value="Loções">Loções</option>
+                <option value="Perfumes">Perfumes</option>
+                <option value="Bolsas">Bolsas</option>
+                <option value="Roupas">Roupas</option>
+                <option value="Sapatos">Sapatos</option>
+                <option value="Outros">Outros</option>
+            </select>
+        </div>
+
+        <div id="lista-itens" style="margin-top: 15px;"></div>
+    </div>
 </div>
 
 <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+    import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
     const firebaseConfig = { 
         apiKey: "AIzaSyCA00i6Jpjk_SFQjda-WMN2Q-QDaLEPNS8", 
@@ -78,44 +108,123 @@
         appId: "1:637321141515:web:715fdc3a661491d7e4d60e" 
     };
 
-    const app = initializeApp(firebaseConfig);
+    let app;
+    if (!getApps().length) {
+        app = initializeApp(firebaseConfig);
+    } else {
+        app = getApp();
+    }
+
     const db = getFirestore(app);
+    let produtosLocal = [];
+
+    async function carregarProdutos() {
+        try {
+            const querySnapshot = await getDocs(collection(db, "produtos"));
+            produtosLocal = [];
+            querySnapshot.forEach((docSnap) => {
+                const p = docSnap.data();
+                p.id = docSnap.id;
+                produtosLocal.push(p);
+            });
+            renderizarLista(produtosLocal);
+        } catch (error) {
+            console.error("Erro ao conectar ao Firebase:", error);
+        }
+    }
+
+    function renderizarLista(listaDeProdutos) {
+        const lista = document.getElementById('lista-itens');
+        lista.innerHTML = "";
+        
+        if (listaDeProdutos.length === 0) {
+            lista.innerHTML = "<p style='text-align:center; color:#777;'>Nenhum produto cadastrado.</p>";
+            return;
+        }
+
+        listaDeProdutos.forEach((p) => {
+            lista.innerHTML += `
+                <div class="item-produto">
+                    <img src="${p.imagens ? p.imagens[0] : p.imagem}" alt="${p.nome}" style="width: 40px; height: 40px; object-fit: cover;">
+                    <div class="info">
+                        <strong>${p.nome}</strong><br>
+                        <span style="color:var(--verde); font-size: 0.75rem">${p.categoria || 'Outros'} | R$ ${Number(p.preco).toFixed(2)}</span>
+                    </div>
+                    <div class="acoes">
+                        <button class="btn-edit" onclick="window.editarProduto('${p.id}')">✏️</button>
+                        <button class="btn-del" onclick="window.excluirProduto('${p.id}')">🗑️</button>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    window.filtrarLista = () => {
+        const termoBusca = document.getElementById('filtro-nome').value.toLowerCase();
+        const catSelecionada = document.getElementById('filtro-categoria').value;
+        let filtrados = produtosLocal;
+
+        if (catSelecionada !== 'Todas') {
+            filtrados = filtrados.filter(p => (p.categoria || 'Outros') === catSelecionada);
+        }
+        if (termoBusca !== '') {
+            filtrados = filtrados.filter(p => p.nome.toLowerCase().includes(termoBusca));
+        }
+        renderizarLista(filtrados);
+    };
 
     document.getElementById('form-produto').addEventListener('submit', async (e) => {
         e.preventDefault();
-        const btn = e.target.querySelector('button');
-        btn.innerText = "Cadastrando...";
-        btn.disabled = true;
-
-        const imagensExtra = document.getElementById('imagens_extra').value;
-        const listaImagens = [document.getElementById('imagem').value];
-        if(imagensExtra) {
-            imagensExtra.split(',').forEach(link => listaImagens.push(link.trim()));
-        }
-
-        const novoProduto = {
-            nome: document.getElementById('nome').value,
-            preco: parseFloat(document.getElementById('preco').value),
-            categoria: document.getElementById('categoria').value,
-            genero: document.getElementById('genero').value,
-            tamanhos: document.getElementById('tamanhos').value,
-            imagens: listaImagens,
-            descricao: document.getElementById('descricao').value,
-            data_cadastro: new Date()
-        };
+        const idEdicao = document.getElementById('id-edicao').value;
+        const nome = document.getElementById('nome').value;
+        const preco = parseFloat(document.getElementById('preco').value);
+        const categoria = document.getElementById('categoria').value;
+        const genero = document.getElementById('genero').value;
+        const imagem = document.getElementById('imagem').value;
 
         try {
-            await addDoc(collection(db, "produtos"), novoProduto);
-            alert("Sucesso! Produto disponível na TeAura Boutique.");
-            e.target.reset();
-        } catch (erro) {
-            console.error(erro);
-            alert("Erro ao cadastrar. Verifique a conexão.");
-        } finally {
-            btn.innerText = "Cadastrar Produto";
-            btn.disabled = false;
+            if (idEdicao) {
+                await updateDoc(doc(db, "produtos", idEdicao), {
+                    nome, preco, categoria, genero, imagem, imagens: [imagem]
+                });
+                alert("Produto atualizado com sucesso!");
+            } else {
+                await addDoc(collection(db, "produtos"), {
+                    nome, preco, categoria, genero, imagem, imagens: [imagem]
+                });
+                alert("Produto cadastrado com sucesso!");
+            }
+            document.getElementById('form-produto').reset();
+            document.getElementById('id-edicao').value = "";
+            document.getElementById('btn-submit').innerText = "Salvar Produto";
+            await carregarProdutos();
+        } catch (err) {
+            alert("Erro ao salvar o produto no banco. Verifique sua conexão à internet.");
         }
     });
+
+    window.excluirProduto = async (id) => {
+        if (confirm("Deseja realmente excluir?")) {
+            await deleteDoc(doc(db, "produtos", id));
+            await carregarProdutos();
+        }
+    };
+
+    window.editarProduto = (id) => {
+        const p = produtosLocal.find(prod => prod.id === id);
+        if (p) {
+            document.getElementById('nome').value = p.nome;
+            document.getElementById('preco').value = p.preco;
+            document.getElementById('categoria').value = p.categoria;
+            document.getElementById('genero').value = p.genero;
+            document.getElementById('imagem').value = p.imagens ? p.imagens[0] : p.imagem;
+            document.getElementById('id-edicao').value = id;
+            document.getElementById('btn-submit').innerText = "Atualizar Produto";
+            window.scrollTo(0, 0);
+        }
+    };
+
+    carregarProdutos();
 </script>
 </body>
 </html>
