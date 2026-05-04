@@ -1,22 +1,54 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acesso Restrito</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Login | TeAura Boutique</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #f8f9fa; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            color: #333;
+        }
+        .login-card {
+            background: white; 
+            padding: 40px; 
+            border-radius: 12px; 
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05); 
+            text-align: center; 
+            width: 100%; 
+            max-width: 350px;
+            border: 1px solid #E5D3B3;
+        }
+        h2 { font-family: 'Cinzel', serif; color: #1E5631; margin-bottom: 10px; }
+        p { font-size: 0.8rem; color: #777; margin-bottom: 25px; }
+        label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; display: block; text-align: left; margin-bottom: 5px; color: #666; }
+        input { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 0.9rem; }
+        button { background: #1E5631; color: white; border: none; padding: 12px 20px; width: 100%; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 0.9rem; transition: 0.3s; }
+        button:hover { background: #143d22; }
+        .back-link { display: block; margin-top: 20px; font-size: 0.75rem; color: #D4AF37; text-decoration: none; font-weight: bold; text-transform: uppercase; }
+    </style>
 </head>
-<body style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f4f9;">
-    <div class="produto" style="max-width: 400px; width: 100%; text-align: center; padding: 20px;">
-        <h3>🔒 Área do Funcionário</h3>
-        <div class="formulario-cliente" style="margin-top: 20px;">
-            <input type="email" id="emailLogin" placeholder="E-mail" required>
-            <input type="password" id="senhaLogin" placeholder="Senha" required>
-        </div>
-        <br>
-        <button id="btnEntrar" style="background-color: #28a745; width: 100%;">Entrar</button>
-        <p><a href="index.html" style="font-size: 12px; color: #666; text-decoration: none;">Voltar para a loja</a></p>
+<body>
+
+    <div class="login-card">
+        <h2>TE AURA</h2>
+        <p>Painel Administrativo</p>
+        
+        <label>Senha de Acesso</label>
+        <input type="password" id="senha" placeholder="Digite sua senha" onkeypress="if(event.key === 'Enter') verificar()">
+        
+        <button onclick="verificar()">Entrar</button>
+        
+        <a href="index.html" class="back-link">Voltar para a Loja</a>
     </div>
+
     <script type="module" src="login.js"></script>
 </body>
 </html>

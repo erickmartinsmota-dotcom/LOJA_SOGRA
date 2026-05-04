@@ -28,11 +28,27 @@
         .acoes { display: flex; gap: 5px; }
         .btn-edit { background: #f0ad4e; color: white; border: none; padding: 5px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; }
         .btn-del { background: #d9534f; color: white; border: none; padding: 5px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; }
+        .btn-sair { background: #c9184a; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; margin-bottom: 15px; }
     </style>
+    
+    <script>
+        // Verificação de segurança: Só permite o acesso se o usuário estiver autenticado
+        if (!localStorage.getItem('admin_autenticado')) {
+            alert("Acesso negado! Faça o login primeiro.");
+            window.location.href = "login.html";
+        }
+
+        // Função de saída
+        window.sairAdmin = () => {
+            localStorage.removeItem('admin_autenticado');
+            window.location.href = "login.html";
+        }
+    </script>
 </head>
 <body>
 
 <div class="container">
+    <button class="btn-sair" onclick="window.sairAdmin()">Sair / Bloquear</button>
     <h2>Painel TeAura</h2>
     <p style="text-align: center; font-size: 0.75rem; color: #999; margin-bottom: 20px;">Gerenciamento de Estoque</p>
 
