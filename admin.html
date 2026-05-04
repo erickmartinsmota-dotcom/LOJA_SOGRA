@@ -32,17 +32,27 @@
     </style>
     
     <script>
-        // Verificação de segurança: Só permite o acesso se o usuário estiver autenticado
-        if (!localStorage.getItem('admin_autenticado')) {
-            alert("Acesso negado! Faça o login primeiro.");
-            window.location.href = "login.html";
-        }
+        // Pede a senha assim que a página é aberta
+        (function() {
+            const senhaCorreta = "1234"; // Defina a sua senha secreta aqui!
+            const isAuth = localStorage.getItem('admin_autenticado') === 'true';
 
-        // Função de saída
+            if (!isAuth) {
+                const senhaDigitada = prompt("Painel Protegido - Digite a senha de acesso:");
+                if (senhaDigitada !== senhaCorreta) {
+                    alert("Acesso negado! Redirecionando para a loja...");
+                    window.location.href = "index.html";
+                } else {
+                    // Salva a autorização na memória do navegador
+                    localStorage.setItem('admin_autenticado', 'true');
+                }
+            }
+        })();
+
         window.sairAdmin = () => {
             localStorage.removeItem('admin_autenticado');
-            window.location.href = "login.html";
-        }
+            window.location.href = "index.html";
+        };
     </script>
 </head>
 <body>
