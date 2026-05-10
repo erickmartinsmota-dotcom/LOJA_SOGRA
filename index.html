@@ -12,102 +12,44 @@
         header { background: white; padding: 25px; text-align: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
         header h1 { font-family: 'Cinzel', serif; color: var(--verde); margin: 0; font-size: 2rem; letter-spacing: 3px; }
 
-        /* Banner de Identificação */
-        .identificacao-banner { background: var(--verde); color: white; padding: 15px; text-align: center; font-size: 0.85rem; }
-        .identificacao-banner input { 
-            padding: 8px 15px; 
-            border-radius: 4px; 
-            border: none; 
-            margin-left: 10px; 
-            width: 200px; 
-            font-family: 'Montserrat', sans-serif;
-        }
+        /* Filtros */
+        .filtros { display: flex; justify-content: center; gap: 15px; padding: 20px; background: white; border-bottom: 1px solid #eee; flex-wrap: wrap; }
+        .filtros select { padding: 12px; border-radius: 5px; border: 1px solid #ddd; background: white; font-family: 'Montserrat', sans-serif; cursor: pointer; min-width: 180px; }
 
-        /* Filtros Originais */
-        .filtros { 
-            display: flex; 
-            justify-content: center; 
-            gap: 15px; 
-            padding: 20px; 
-            background: white; 
-            border-bottom: 1px solid #eee; 
-            flex-wrap: wrap;
-        }
-        .filtros select { 
-            padding: 12px 20px; 
-            border-radius: 5px; 
-            border: 1px solid #ddd; 
-            background: white; 
-            font-family: 'Montserrat', sans-serif; 
-            cursor: pointer;
-            min-width: 180px;
-        }
-
-        /* Vitrine Completa */
-        .vitrine { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-            gap: 30px; 
-            padding: 40px 20px; 
-            max-width: 1200px; 
-            margin: 0 auto; 
-        }
-        .card { 
-            background: white; 
-            border-radius: 0; 
-            overflow: hidden; 
-            box-shadow: 0 10px 20px rgba(0,0,0,0.03); 
-            transition: 0.4s; 
-            border: 1px solid #f0f0f0;
-            display: flex;
-            flex-direction: column;
-        }
-        .card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
-        
-        .card img { width: 100%; height: 380px; object-fit: cover; }
-        
+        /* Vitrine */
+        .vitrine { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; padding: 40px 20px; max-width: 1200px; margin: 0 auto; }
+        .card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; border: 1px solid #f0f0f0; display: flex; flex-direction: column; }
+        .card img { width: 100%; height: 350px; object-fit: cover; }
         .card-info { padding: 20px; text-align: center; flex-grow: 1; }
-        .card-info h3 { 
-            font-family: 'Cinzel', serif; 
-            font-size: 0.95rem; 
-            margin: 0 0 10px 0; 
-            color: #222; 
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .card-info .categoria { font-size: 0.75rem; color: var(--dourado); font-weight: 600; text-transform: uppercase; margin-bottom: 8px; display: block; }
+        .card-info h3 { font-family: 'Cinzel', serif; font-size: 0.95rem; margin-bottom: 10px; text-transform: uppercase; }
         .card-info .preco { color: var(--verde); font-weight: bold; font-size: 1.2rem; }
 
-        /* Botão Comprar Agora Tradicional */
-        .btn-comprar { 
-            background: var(--verde); 
-            color: white; 
-            border: none; 
-            padding: 15px; 
-            width: 100%; 
-            cursor: pointer; 
-            font-weight: 600; 
-            text-transform: uppercase; 
-            letter-spacing: 1px;
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 10px; 
-            transition: 0.3s;
-        }
+        .btn-comprar { background: var(--verde); color: white; border: none; padding: 15px; width: 100%; cursor: pointer; font-weight: 600; text-transform: uppercase; transition: 0.3s; }
         .btn-comprar:hover { background: #143d22; }
 
-        footer { background: #111; color: white; padding: 60px 20px; text-align: center; margin-top: 50px; }
-        footer p { opacity: 0.6; font-size: 0.8rem; letter-spacing: 1px; }
-        .link-admin { color: #444; text-decoration: none; font-size: 0.7rem; display: inline-block; margin-top: 20px; text-transform: uppercase; }
+        /* MODAL (JANELA FLUTUANTE) */
+        .modal-overlay { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; z-index: 1000; 
+        }
+        .modal-content { 
+            background: white; padding: 30px; border-radius: 12px; width: 90%; max-width: 400px; text-align: center; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .modal-content h2 { font-family: 'Cinzel', serif; color: var(--verde); margin-bottom: 15px; }
+        .modal-content input { 
+            width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; 
+            border-radius: 6px; box-sizing: border-box; font-family: 'Montserrat', sans-serif;
+        }
+        .modal-buttons { display: flex; flex-direction: column; gap: 10px; }
+        .btn-finalizar { background: #25D366; color: white; border: none; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+        .btn-continuar { background: #eee; color: #555; border: none; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+
+        footer { background: #111; color: white; padding: 40px; text-align: center; margin-top: 50px; }
+        .link-admin { color: #444; text-decoration: none; font-size: 0.7rem; display: block; margin-top: 20px; }
     </style>
 </head>
 <body>
-
-    <div class="identificacao-banner">
-        PARA REALIZAR PEDIDOS, INFORME SEU NOME: 
-        <input type="text" id="nome-cliente" placeholder="Nome Completo">
-    </div>
 
     <header>
         <h1>TE AURA BOUTIQUE</h1>
@@ -127,14 +69,27 @@
             <option value="Bolsas">Bolsas</option>
             <option value="Roupas">Roupas</option>
             <option value="Sapatos">Sapatos</option>
-            <option value="Outros">Outros</option>
         </select>
     </div>
 
     <main>
-        <div id="vitrine-produtos" class="vitrine">
-            </div>
+        <div id="vitrine-produtos" class="vitrine"></div>
     </main>
+
+    <div id="modalCompra" class="modal-overlay">
+        <div class="modal-content">
+            <h2 id="modal-titulo-produto">Produto</h2>
+            <p id="modal-preco-produto" style="font-weight: bold; color: var(--verde);"></p>
+            
+            <label style="display:block; text-align:left; font-size: 0.8rem; margin-bottom: 5px;">SEU NOME COMPLETO:</label>
+            <input type="text" id="nome-cliente" placeholder="Como podemos te chamar?">
+
+            <div class="modal-buttons">
+                <button class="btn-finalizar" onclick="window.finalizarPedido()">Finalizar Pedido (WhatsApp)</button>
+                <button class="btn-continuar" onclick="window.fecharModal()">Continuar Comprando</button>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <p>TE AURA BOUTIQUE &copy; 2024</p>
@@ -157,10 +112,11 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         let todosProdutos = [];
+        let produtoSelecionado = {};
 
         async function carregar() {
             const snap = await getDocs(collection(db, "produtos"));
-            todosProdutos = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            todosProdutos = snap.docs.map(doc => doc.data());
             window.filtrar();
         }
 
@@ -179,30 +135,38 @@
                 <div class="card">
                     <img src="${p.imagem}" alt="${p.nome}">
                     <div class="card-info">
-                        <span class="categoria">${p.categoria || 'Geral'}</span>
                         <h3>${p.nome}</h3>
                         <p class="preco">R$ ${Number(p.preco).toFixed(2)}</p>
                     </div>
-                    <button class="btn-comprar" onclick="window.comprar('${p.nome}', '${p.preco}')">
-                        Comprar Agora
-                    </button>
+                    <button class="btn-comprar" onclick="window.abrirModal('${p.nome}', '${p.preco}')">Comprar Agora</button>
                 </div>
             `).join('');
         };
 
-        window.comprar = (produto, valor) => {
+        // LÓGICA DO MODAL
+        window.abrirModal = (nome, preco) => {
+            produtoSelecionado = { nome, preco };
+            document.getElementById('modal-titulo-produto').innerText = nome;
+            document.getElementById('modal-preco-produto').innerText = `R$ ${Number(preco).toFixed(2)}`;
+            document.getElementById('modalCompra').style.display = 'flex';
+        };
+
+        window.fecharModal = () => {
+            document.getElementById('modalCompra').style.display = 'none';
+        };
+
+        window.finalizarPedido = () => {
             const nomeCli = document.getElementById('nome-cliente').value.trim();
-            const fone = "55219XXXXXXXX"; // Substitua pelo seu número
+            const fone = "55219XXXXXXXX"; // TROQUE PELO SEU NÚMERO
 
             if (!nomeCli) {
-                alert("Por favor, informe seu nome no topo da página para continuar.");
-                window.scrollTo(0,0);
-                document.getElementById('nome-cliente').focus();
+                alert("Por favor, digite seu nome para finalizar o pedido!");
                 return;
             }
 
-            const texto = encodeURIComponent(`Olá! Meu nome é ${nomeCli}. Gostaria de comprar: ${produto} (R$ ${Number(valor).toFixed(2)}).`);
-            window.open(`https://api.whatsapp.com/send?phone=${fone}&text=${texto}`, '_blank');
+            const msg = encodeURIComponent(`Olá! Meu nome é ${nomeCli}. Quero finalizar o pedido do produto: ${produtoSelecionado.nome} (R$ ${Number(produtoSelecionado.preco).toFixed(2)}).`);
+            window.open(`https://api.whatsapp.com/send?phone=${fone}&text=${msg}`, '_blank');
+            window.fecharModal();
         };
 
         carregar();
