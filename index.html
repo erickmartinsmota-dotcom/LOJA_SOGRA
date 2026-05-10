@@ -9,34 +9,105 @@
         :root { --verde: #1E5631; --dourado: #D4AF37; --creme: #FDFBF7; }
         body { font-family: 'Montserrat', sans-serif; background-color: var(--creme); margin: 0; color: #333; }
         
-        header { background: white; padding: 20px; text-align: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
-        header h1 { font-family: 'Cinzel', serif; color: var(--verde); margin: 0; font-size: 1.8rem; letter-spacing: 2px; }
+        header { background: white; padding: 25px; text-align: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
+        header h1 { font-family: 'Cinzel', serif; color: var(--verde); margin: 0; font-size: 2rem; letter-spacing: 3px; }
 
-        /* Filtros */
-        .filtros { display: flex; justify-content: center; gap: 10px; padding: 20px; flex-wrap: wrap; background: #fff; border-bottom: 1px solid #eee; }
-        .filtros select { padding: 10px; border-radius: 6px; border: 1px solid #ddd; font-family: 'Montserrat', sans-serif; outline: none; }
+        /* Banner de Identificação */
+        .identificacao-banner { background: var(--verde); color: white; padding: 15px; text-align: center; font-size: 0.85rem; }
+        .identificacao-banner input { 
+            padding: 8px 15px; 
+            border-radius: 4px; 
+            border: none; 
+            margin-left: 10px; 
+            width: 200px; 
+            font-family: 'Montserrat', sans-serif;
+        }
 
-        /* Vitrine */
-        .vitrine { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; padding: 20px; max-width: 1200px; margin: 0 auto; }
-        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s; border: 1px solid #eee; position: relative; }
-        .card img { width: 100%; height: 320px; object-fit: cover; }
-        .card-info { padding: 15px; text-align: center; }
-        .card-info h3 { font-size: 0.9rem; margin: 10px 0; color: #444; text-transform: uppercase; }
-        .card-info .preco { color: var(--verde); font-weight: bold; font-size: 1.1rem; }
+        /* Filtros Originais */
+        .filtros { 
+            display: flex; 
+            justify-content: center; 
+            gap: 15px; 
+            padding: 20px; 
+            background: white; 
+            border-bottom: 1px solid #eee; 
+            flex-wrap: wrap;
+        }
+        .filtros select { 
+            padding: 12px 20px; 
+            border-radius: 5px; 
+            border: 1px solid #ddd; 
+            background: white; 
+            font-family: 'Montserrat', sans-serif; 
+            cursor: pointer;
+            min-width: 180px;
+        }
 
-        /* SEÇÃO DE CONTATO WHATSAPP (NOVA) */
-        .secao-contato { background: white; padding: 40px 20px; text-align: center; border-top: 1px solid #eee; margin-top: 40px; }
-        .contato-container { max-width: 400px; margin: 0 auto; }
-        .secao-contato h3 { font-family: 'Cinzel', serif; color: var(--verde); margin-bottom: 10px; }
-        .campo-nome { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px; font-family: 'Montserrat', sans-serif; box-sizing: border-box; }
-        .btn-whatsapp { width: 100%; background: #25D366; color: white; border: none; padding: 14px; border-radius: 8px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; }
-        .btn-whatsapp:hover { background: #1ebd59; }
+        /* Vitrine Completa */
+        .vitrine { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 30px; 
+            padding: 40px 20px; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+        }
+        .card { 
+            background: white; 
+            border-radius: 0; 
+            overflow: hidden; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.03); 
+            transition: 0.4s; 
+            border: 1px solid #f0f0f0;
+            display: flex;
+            flex-direction: column;
+        }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
+        
+        .card img { width: 100%; height: 380px; object-fit: cover; }
+        
+        .card-info { padding: 20px; text-align: center; flex-grow: 1; }
+        .card-info h3 { 
+            font-family: 'Cinzel', serif; 
+            font-size: 0.95rem; 
+            margin: 0 0 10px 0; 
+            color: #222; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .card-info .categoria { font-size: 0.75rem; color: var(--dourado); font-weight: 600; text-transform: uppercase; margin-bottom: 8px; display: block; }
+        .card-info .preco { color: var(--verde); font-weight: bold; font-size: 1.2rem; }
 
-        footer { background: #1a1a1a; color: white; padding: 30px; text-align: center; font-size: 0.8rem; }
-        .link-admin { color: #555; text-decoration: none; display: block; margin-top: 15px; }
+        /* Botão Comprar Agora Tradicional */
+        .btn-comprar { 
+            background: var(--verde); 
+            color: white; 
+            border: none; 
+            padding: 15px; 
+            width: 100%; 
+            cursor: pointer; 
+            font-weight: 600; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 10px; 
+            transition: 0.3s;
+        }
+        .btn-comprar:hover { background: #143d22; }
+
+        footer { background: #111; color: white; padding: 60px 20px; text-align: center; margin-top: 50px; }
+        footer p { opacity: 0.6; font-size: 0.8rem; letter-spacing: 1px; }
+        .link-admin { color: #444; text-decoration: none; font-size: 0.7rem; display: inline-block; margin-top: 20px; text-transform: uppercase; }
     </style>
 </head>
 <body>
+
+    <div class="identificacao-banner">
+        PARA REALIZAR PEDIDOS, INFORME SEU NOME: 
+        <input type="text" id="nome-cliente" placeholder="Nome Completo">
+    </div>
 
     <header>
         <h1>TE AURA BOUTIQUE</h1>
@@ -56,27 +127,17 @@
             <option value="Bolsas">Bolsas</option>
             <option value="Roupas">Roupas</option>
             <option value="Sapatos">Sapatos</option>
+            <option value="Outros">Outros</option>
         </select>
     </div>
 
     <main>
-        <div id="vitrine-produtos" class="vitrine"></div>
-
-        <section class="secao-contato">
-            <div class="contato-container">
-                <h3>Ficou com alguma dúvida?</h3>
-                <p>Digite seu nome para nos chamar no WhatsApp:</p>
-                <input type="text" id="nome-cliente" placeholder="Seu nome aqui..." class="campo-nome">
-                <button onclick="enviarWhatsapp()" class="btn-whatsapp">
-                    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="20" height="20">
-                    Chamar no WhatsApp
-                </button>
+        <div id="vitrine-produtos" class="vitrine">
             </div>
-        </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 TeAura Boutique</p>
+        <p>TE AURA BOUTIQUE &copy; 2024</p>
         <a href="login.html" class="link-admin">Acesso Restrito</a>
     </footer>
 
@@ -99,7 +160,7 @@
 
         async function carregar() {
             const snap = await getDocs(collection(db, "produtos"));
-            todosProdutos = snap.docs.map(doc => doc.data());
+            todosProdutos = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             window.filtrar();
         }
 
@@ -118,29 +179,33 @@
                 <div class="card">
                     <img src="${p.imagem}" alt="${p.nome}">
                     <div class="card-info">
+                        <span class="categoria">${p.categoria || 'Geral'}</span>
                         <h3>${p.nome}</h3>
                         <p class="preco">R$ ${Number(p.preco).toFixed(2)}</p>
                     </div>
+                    <button class="btn-comprar" onclick="window.comprar('${p.nome}', '${p.preco}')">
+                        Comprar Agora
+                    </button>
                 </div>
             `).join('');
         };
 
-        carregar();
-    </script>
+        window.comprar = (produto, valor) => {
+            const nomeCli = document.getElementById('nome-cliente').value.trim();
+            const fone = "55219XXXXXXXX"; // Substitua pelo seu número
 
-    <script>
-        function enviarWhatsapp() {
-            const nome = document.getElementById('nome-cliente').value.trim();
-            const seuTelefone = "55219XXXXXXXX"; // <-- COLOQUE SEU NÚMERO AQUI
-
-            if (!nome) {
-                alert("Por favor, digite seu nome.");
+            if (!nomeCli) {
+                alert("Por favor, informe seu nome no topo da página para continuar.");
+                window.scrollTo(0,0);
+                document.getElementById('nome-cliente').focus();
                 return;
             }
 
-            const msg = encodeURIComponent(`Olá! Meu nome é ${nome}, vi os produtos no site e gostaria de tirar uma dúvida.`);
-            window.open(`https://api.whatsapp.com/send?phone=${seuTelefone}&text=${msg}`, '_blank');
-        }
+            const texto = encodeURIComponent(`Olá! Meu nome é ${nomeCli}. Gostaria de comprar: ${produto} (R$ ${Number(valor).toFixed(2)}).`);
+            window.open(`https://api.whatsapp.com/send?phone=${fone}&text=${texto}`, '_blank');
+        };
+
+        carregar();
     </script>
 </body>
 </html>
