@@ -156,18 +156,31 @@
         };
 
         window.finalizarPedido = () => {
-            const nomeCli = document.getElementById('nome-cliente').value.trim();
-            const fone = "558695105264"; // TROQUE PELO SEU NÚMERO
+    const nomeCli = document.getElementById('nome-cliente').value.trim();
+    const fone = "55219XXXXXXXX"; // <-- COLOQUE SEU NÚMERO AQUI
 
-            if (!nomeCli) {
-                alert("Por favor, digite seu nome para finalizar o pedido!");
-                return;
-            }
+    if (!nomeCli) {
+        alert("Por favor, informe seu nome para que possamos personalizar seu atendimento.");
+        return;
+    }
 
-            const msg = encodeURIComponent(`Olá! Meu nome é ${nomeCli}. Quero finalizar o pedido do produto: ${produtoSelecionado.nome} (R$ ${Number(produtoSelecionado.preco).toFixed(2)}).`);
-            window.open(`https://api.whatsapp.com/send?phone=${fone}&text=${msg}`, '_blank');
-            window.fecharModal();
-        };
+    // Formatação do valor para o padrão brasileiro (R$ 0,00)
+    const valorFormatado = Number(produtoSelecionado.preco).toLocaleString('pt-BR', { 
+        style: 'currency', 
+        currency: 'BRL' 
+    });
+
+    // Estrutura da mensagem seguindo a norma culta
+    const saudacao = `Olá! Meu nome é ${nomeCli}.`;
+    const corpoMensagem = `Gostaria de solicitar o seguinte item do catálogo virtual:`;
+    const detalhes = `*Produto:* ${produtoSelecionado.nome}\n*Valor unitário:* ${valorFormatado}`;
+    const fechamento = `Poderia me informar a disponibilidade e as opções de entrega?\n\n*Total do pedido: ${valorFormatado}*`;
+
+    const textoFinal = encodeURIComponent(`${saudacao}\n\n${corpoMensagem}\n\n${detalhes}\n\n${fechamento}`);
+    
+    window.open(`https://api.whatsapp.com/send?phone=${fone}&text=${textoFinal}`, '_blank');
+    window.fecharModal();
+};
 
         carregar();
     </script>
