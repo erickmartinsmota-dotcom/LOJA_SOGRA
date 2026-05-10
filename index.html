@@ -97,92 +97,119 @@
     </footer>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-        const firebaseConfig = { 
-            apiKey: "AIzaSyCA00i6Jpjk_SFQjda-WMN2Q-QDaLEPNS8", 
-            authDomain: "lojinha-da-sogra.firebaseapp.com", 
-            projectId: "lojinha-da-sogra", 
-            storageBucket: "lojinha-da-sogra.firebasestorage.app", 
-            messagingSenderId: "637321141515", 
-            appId: "1:637321141515:web:715fdc3a661491d7e4d60e" 
-        };
+    const firebaseConfig = { 
+        apiKey: "AIzaSyCA00i6Jpjk_SFQjda-WMN2Q-QDaLEPNS8", 
+        authDomain: "lojinha-da-sogra.firebaseapp.com", 
+        projectId: "lojinha-da-sogra", 
+        storageBucket: "lojinha-da-sogra.firebasestorage.app", 
+        messagingSenderId: "637321141515", 
+        appId: "1:637321141515:web:715fdc3a661491d7e4d60e" 
+    };
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        let todosProdutos = [];
-        let produtoSelecionado = {};
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    let todosProdutos = [];
+    
+    // VARIÁVEIS DO CARRINHO
+    let carrinho = []; 
+    let produtoAtual = {};
 
-        async function carregar() {
-            const snap = await getDocs(collection(db, "produtos"));
-            todosProdutos = snap.docs.map(doc => doc.data());
-            window.filtrar();
-        }
-
-        window.filtrar = () => {
-            const gen = document.getElementById('filtro-genero').value;
-            const cat = document.getElementById('filtro-categoria').value;
-            const vitrine = document.getElementById('vitrine-produtos');
-            
-            let filtrados = todosProdutos.filter(p => {
-                const bateG = gen === "Todos" || p.genero === gen;
-                const bateC = cat === "Todas" || p.categoria === cat;
-                return bateG && bateC;
-            });
-
-            vitrine.innerHTML = filtrados.map(p => `
-                <div class="card">
-                    <img src="${p.imagem}" alt="${p.nome}">
-                    <div class="card-info">
-                        <h3>${p.nome}</h3>
-                        <p class="preco">R$ ${Number(p.preco).toFixed(2)}</p>
-                    </div>
-                    <button class="btn-comprar" onclick="window.abrirModal('${p.nome}', '${p.preco}')">Comprar Agora</button>
-                </div>
-            `).join('');
-        };
-
-        // LÓGICA DO MODAL
-        window.abrirModal = (nome, preco) => {
-            produtoSelecionado = { nome, preco };
-            document.getElementById('modal-titulo-produto').innerText = nome;
-            document.getElementById('modal-preco-produto').innerText = `R$ ${Number(preco).toFixed(2)}`;
-            document.getElementById('modalCompra').style.display = 'flex';
-        };
-
-        window.fecharModal = () => {
-            document.getElementById('modalCompra').style.display = 'none';
-        };
-
-        window.finalizarPedido = () => {
-    const nomeCli = document.getElementById('nome-cliente').value.trim();
-    const fone = "55219XXXXXXXX"; // <-- COLOQUE SEU NÚMERO AQUI
-
-    if (!nomeCli) {
-        alert("Por favor, informe seu nome para que possamos personalizar seu atendimento.");
-        return;
+    async function carregar() {
+        const snap = await getDocs(collection(db, "produtos"));
+        todosProdutos = snap.docs.map(doc => doc.data());
+        window.filtrar();
     }
 
-    // Formatação do valor para o padrão brasileiro (R$ 0,00)
-    const valorFormatado = Number(produtoSelecionado.preco).toLocaleString('pt-BR', { 
-        style: 'currency', 
-        currency: 'BRL' 
-    });
+    window.filtrar = () => {
+        const gen = document.getElementById('filtro-genero').value;
+        const cat = document.getElementById('filtro-categoria').value;
+        const vitrine = document.getElementById('vitrine-produtos');
+        
+        let filtrados = todosProdutos.filter(p => {
+            const bateG = gen === "Todos" || p.genero === gen;
+            const bateC = cat === "Todas" || p.categoria === cat;
+            return bateG && bateC;
+        });
 
-    // Estrutura da mensagem seguindo a norma culta
-    const saudacao = `Olá! Meu nome é ${nomeCli}.`;
-    const corpoMensagem = `Gostaria de solicitar o seguinte item do catálogo virtual:`;
-    const detalhes = `*Produto:* ${produtoSelecionado.nome}\n*Valor unitário:* ${valorFormatado}`;
-    const fechamento = `Poderia me informar a disponibilidade e as opções de entrega?\n\n*Total do pedido: ${valorFormatado}*`;
+        vitrine.innerHTML = filtrados.map(p => `
+            <div class="card">
+                <img src="${p.imagem}" alt="${p.nome}">
+                <div class="card-info">
+                    <h3>${p.nome}</h3>
+                    <p class="preco">R$ ${Number(p.preco).toFixed(2)}</p>
+                </div>
+                <button class="btn-comprar" onclick="window.abrirModal('${p.nome}', '${p.preco}')">Adicionar ao Carrinho</button>
+            </div>
+        `).join('');
+    };
 
-    const textoFinal = encodeURIComponent(`${saudacao}\n\n${corpoMensagem}\n\n${detalhes}\n\n${fechamento}`);
-    
-    window.open(`https://api.whatsapp.com/send?phone=${fone}&text=${textoFinal}`, '_blank');
-    window.fecharModal();
-};
+    // ABRIR MODAL
+    window.abrirModal = (nome, preco) => {
+        produtoAtual = { nome, preco: parseFloat(preco) };
+        document.getElementById('modal-titulo-produto').innerText = nome;
+        document.getElementById('modal-preco-produto').innerText = `R$ ${produtoAtual.preco.toFixed(2)}`;
+        document.getElementById('modalCompra').style.display = 'flex';
+    };
 
-        carregar();
-    </script>
+    // BOTÃO CONTINUAR COMPRANDO
+    window.fecharModal = () => {
+        carrinho.push(produtoAtual); // Adiciona o item na lista
+        alert(`${produtoAtual.nome} adicionado ao carrinho!`);
+        document.getElementById('modalCompra').style.display = 'none';
+    };
+
+    // BOTÃO FINALIZAR PEDIDO
+    window.finalizarPedido = () => {
+        const nomeCli = document.getElementById('nome-cliente').value.trim();
+        const fone = "55219XXXXXXXX"; // <-- SEU NÚMERO AQUI
+
+        if (!nomeCli) {
+            alert("Por favor, informe seu nome para finalizar o pedido.");
+            return;
+        }
+
+        // Adiciona o último produto se ele ainda não foi para o carrinho
+        if (produtoAtual.nome) {
+            carrinho.push(produtoAtual);
+            produtoAtual = {}; 
+        }
+
+        if (carrinho.length === 0) {
+            alert("Seu carrinho está vazio!");
+            return;
+        }
+
+        // Calcula o Total e monta a lista de texto
+        let total = 0;
+        let listaProdutosTexto = "";
+
+        carrinho.forEach((item, index) => {
+            total += item.preco;
+            listaProdutosTexto += `${index + 1}. *${item.nome}* - R$ ${item.preco.toFixed(2)}\n`;
+        });
+
+        const totalFormatado = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+        // Montagem da Mensagem Profissional
+        const mensagem = encodeURIComponent(
+            `Olá! Meu nome é ${nomeCli}.\n\n` +
+            `Gostaria de finalizar o pedido dos seguintes itens:\n\n` +
+            `${listaProdutosTexto}\n` +
+            `*Valor Total do Pedido: ${totalFormatado}*\n\n` +
+            `Poderia me informar as opções de pagamento e entrega?`
+        );
+
+        window.open(`https://api.whatsapp.com/send?phone=${fone}&text=${mensagem}`, '_blank');
+        
+        // Limpa o carrinho após enviar
+        carrinho = [];
+        document.getElementById('modalCompra').style.display = 'none';
+    };
+
+    carregar();
+</script>
 </body>
 </html>
