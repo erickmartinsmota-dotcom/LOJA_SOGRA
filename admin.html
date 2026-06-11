@@ -3,127 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TeAura Boutique | Home</title>
+    <title>Painel Administrativo | TeAura Boutique</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Cinzel:wght@700&display=swap" rel="stylesheet">
     <style>
         :root { --verde: #1E5631; --dourado: #D4AF37; --creme: #FDFBF7; }
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--creme); margin: 0; color: #333; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #f4f4f9; padding: 20px; color: #333; margin: 0; }
         
-        header { background: white; padding: 25px; text-align: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
-        header h1 { font-family: 'Cinzel', serif; color: var(--verde); margin: 0; font-size: 2rem; letter-spacing: 3px; }
-
-        /* Filtros */
-        .filtros { display: flex; justify-content: center; gap: 15px; padding: 20px; background: white; border-bottom: 1px solid #eee; flex-wrap: wrap; }
-        .filtros select { padding: 12px 20px; border-radius: 5px; border: 1px solid #ddd; background: white; font-family: 'Montserrat', sans-serif; cursor: pointer; min-width: 180px; }
-
-        /* Vitrine */
-        .vitrine { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; padding: 40px 20px; max-width: 1200px; margin: 0 auto; }
-        .card { background: white; border-radius: 0; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.03); transition: 0.4s; border: 1px solid #f0f0f0; display: flex; flex-direction: column; }
-        .card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
-        .card img { width: 100%; height: 380px; object-fit: cover; }
+        .container { max-width: 900px; margin: 30px auto; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
+        h1 { font-family: 'Cinzel', serif; color: var(--verde); text-align: center; margin-bottom: 5px; letter-spacing: 2px; }
+        h2 { font-family: 'Cinzel', serif; color: var(--verde); border-bottom: 2px solid var(--verde); padding-bottom: 10px; margin-top: 40px; }
         
-        .card-info { padding: 20px; text-align: center; flex-grow: 1; }
-        .card-info h3 { font-family: 'Cinzel', serif; font-size: 0.95rem; margin: 0 0 10px 0; color: #222; text-transform: uppercase; letter-spacing: 1px; }
-        .card-info .categoria { font-size: 0.75rem; color: var(--dourado); font-weight: 600; text-transform: uppercase; margin-bottom: 8px; display: block; }
-        .card-info .preco { color: var(--verde); font-weight: bold; font-size: 1.2rem; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: #555; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-family: 'Montserrat', sans-serif; font-size: 0.95rem; outline: none; transition: 0.3s; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--dourado); }
+        
+        .botoes { display: flex; gap: 15px; margin-top: 30px; }
+        button { padding: 14px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; transition: 0.3s; }
+        
+        #btnSalvar { background-color: var(--verde); color: white; flex: 1; }
+        #btnSalvar:hover { background-color: #143d22; }
+        #btnCanc { background-color: #d9534f; color: white; display: none; }
+        #btnCanc:hover { background-color: #c9302c; }
+        
+        .logout-btn { background-color: #333; color: white; float: right; font-size: 0.75rem; padding: 8px 15px; border-radius: 4px; }
+        .logout-btn:hover { background-color: #000; }
+        
+        hr { margin: 40px 0; border: 0; border-top: 1px solid #eee; }
+        #statusAcao { color: var(--dourado); font-weight: 600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 20px; display: block; }
 
-        .btn-comprar { background: var(--verde); color: white; border: none; padding: 15px; width: 100%; cursor: pointer; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; }
-        .btn-comprar:hover { background: #143d22; }
+    /* --- ESTILO DOS CARDS DE PRODUTOS E BOTÕES --- */
+.produto-card {
+    background-color: #ffffff;
+    border: 2px solid #eaeaea; /* O retângulo ao redor do produto */
+    border-radius: 10px; /* Cantos arredondados do retângulo */
+    padding: 20px; /* Espaço interno para não ficar esmagado */
+    margin-bottom: 25px; /* Espaço MAIOR entre um produto e outro */
+    display: flex;
+    justify-content: space-between; /* Joga os botões para a direita */
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.04); /* Sombra bem leve */
+}
 
-        footer { background: #111; color: white; padding: 60px 20px; text-align: center; margin-top: 50px; }
-        footer p { opacity: 0.6; font-size: 0.8rem; letter-spacing: 1px; }
-        .link-admin { color: #444; text-decoration: none; font-size: 0.7rem; display: inline-block; margin-top: 20px; text-transform: uppercase; }
+.produto-info p {
+    margin: 5px 0; /* Separa as linhas de texto */
+}
+
+/* Container para manter os botões lado a lado */
+.botoes-container {
+    display: flex;
+    gap: 12px; /* Espaço entre o botão de editar e excluir */
+}
+
+/* Estilo base dos botões */
+.btn-admin {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    transition: 0.3s;
+}
+
+/* Botão Amarelo - Editar */
+.btn-editar {
+    background-color: #FFC107; 
+    color: #000; /* Texto preto para dar leitura no amarelo */
+}
+.btn-editar:hover {
+    background-color: #e0a800;
+    transform: scale(1.05);
+}
+
+/* Botão Vermelho - Excluir */
+.btn-excluir {
+    background-color: #DC3545;
+    color: #fff; /* Texto branco */
+}
+.btn-excluir:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>TE AURA BOUTIQUE</h1>
-    </header>
+    <div class="container">
+        <button class="logout-btn" onclick="window.fazerLogout()">Sair do Painel</button>
+        
+        <h1>Gestão de Produtos</h1>
+        <span id="statusAcao">Adicionando Novo Produto</span>
+        
+        <input type="hidden" id="editId">
 
-    <div class="filtros">
-        <select id="filtro-genero" onchange="window.filtrar()">
-            <option value="Todos">Todos os Gêneros</option>
-            <option value="Feminino">Feminino</option>
-            <option value="Masculino">Masculino</option>
-        </select>
-        <select id="filtro-categoria" onchange="window.filtrar()">
-            <option value="Todas">Todas as Categorias</option>
-            <option value="Kits Mães">🎁 Kits Dia das Mães</option>
-            <option value="Loções">Loções</option>
-            <option value="Perfumes">Perfumes</option>
-            <option value="Bolsas">Bolsas</option>
-            <option value="Roupas">Roupas</option>
-            <option value="Sapatos">Sapatos</option>
-            <option value="Outros">Outros</option>
-        </select>
+        <div class="form-group">
+            <label>Nome do Produto:</label>
+            <input type="text" id="nomeAdmin" placeholder="Ex: Perfume TeAura Gold">
+        </div>
+
+        <div class="form-group">
+            <label>Descrição:</label>
+            <textarea id="descAdmin" rows="3" placeholder="Insira os detalhes e notas do produto..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Preço (R$):</label>
+            <input type="number" id="precoAdmin" step="0.01" placeholder="Ex: 189.90">
+        </div>
+
+        <div class="form-group">
+            <label>Link da Imagem:</label>
+            <textarea id="imgAdmin" rows="2" placeholder="Cole a URL da imagem armazenada no Firebase Storage..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Categoria:</label>
+            <select id="catAdmin">
+                <option value="Kits Mães">🎁 Kits Dia das Mães</option>
+                <option value="Loções">Loções</option>
+                <option value="Perfumes">Perfumes</option>
+                <option value="Bolsas">Bolsas</option>
+                <option value="Roupas">Roupas</option>
+                <option value="Sapatos">Sapatos</option>
+                <option value="Outros">Outros</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Gênero:</label>
+            <select id="generoAdmin">
+                <option value="Todos">Todos</option>
+                <option value="Feminino">Feminino</option>
+                <option value="Masculino">Masculino</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Tamanhos / Volumetria (Opcional):</label>
+            <input type="text" id="tamanhosAdmin" placeholder="Ex: 50ml, 100ml ou P, M, G">
+        </div>
+
+        <div class="botoes">
+            <button id="btnSalvar">Salvar Produto</button>
+            <button id="btnCanc" onclick="window.cancelarEdicao()">Cancelar Edição</button>
+        </div>
+
+        <hr>
+
+        <h2>Produtos Cadastrados</h2>
+        
+        <div class="form-group">
+            <label>Filtrar Visualização:</label>
+            <select id="filtroCategoriaAdmin">
+                <option value="Todas">Todas as Categorias</option>
+                <option value="Kits Mães">Kits Dia das Mães</option>
+                <option value="Loções">Loções</option>
+                <option value="Perfumes">Perfumes</option>
+                <option value="Bolsas">Bolsas</option>
+                <option value="Roupas">Roupas</option>
+                <option value="Sapatos">Sapatos</option>
+                <option value="Outros">Outros</option>
+            </select>
+        </div>
+
+        <div id="listaProdutosAdmin"></div>
     </div>
 
-    <main>
-        <div id="vitrine-produtos" class="vitrine"></div>
-    </main>
+    <script type="module" src="admin.js"></script>
 
-    <footer>
-        <p>TE AURA BOUTIQUE &copy; 2026 </p>
-        <a href="login.html" class="link-admin">TE AURA</a>
-    </footer>
-
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-
-        const firebaseConfig = { 
-            apiKey: "AIzaSyCA00i6Jpjk_SFQjda-WMN2Q-QDaLEPNS8", 
-            authDomain: "lojinha-da-sogra.firebaseapp.com", 
-            projectId: "lojinha-da-sogra", 
-            storageBucket: "lojinha-da-sogra.firebasestorage.app", 
-            messagingSenderId: "637321141515", 
-            appId: "1:637321141515:web:715fdc3a661491d7e4d60e" 
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        let todosProdutos = [];
-
-        async function carregar() {
-            const snap = await getDocs(collection(db, "produtos"));
-            todosProdutos = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-            window.filtrar();
-        }
-
-        window.filtrar = () => {
-            const gen = document.getElementById('filtro-genero').value;
-            const cat = document.getElementById('filtro-categoria').value;
-            const vitrine = document.getElementById('vitrine-produtos');
-            
-            let filtrados = todosProdutos.filter(p => {
-                const bateG = gen === "Todos" || p.genero === gen;
-                const bateC = cat === "Todas" || p.categoria === cat;
-                return bateG && bateC;
-            });
-
-            vitrine.innerHTML = filtrados.map(p => `
-                <div class="card">
-                    <img src="${p.imagem}" alt="${p.nome}">
-                    <div class="card-info">
-                        <span class="categoria">${p.categoria || 'Geral'}</span>
-                        <h3>${p.nome}</h3>
-                        <p class="preco">R$ ${Number(p.preco).toFixed(2)}</p>
-                    </div>
-                    <button class="btn-comprar" onclick="window.comprar('${p.nome}', '${p.preco}')">
-                        Comprar Agora
-                    </button>
-                </div>
-            `).join('');
-        };
-
-        window.comprar = (produto, valor) => {
-            const fone = "55219XXXXXXXX"; // Substitua pelo seu número real
-            const texto = encodeURIComponent(`Olá! Vi o produto ${produto} (R$ ${Number(valor).toFixed(2)}) no site e gostaria de saber mais.`);
-            window.open(`https://api.whatsapp.com/send?phone=${fone}&text=${texto}`, '_blank');
-        };
-
-        carregar();
-    </script>
 </body>
 </html>
